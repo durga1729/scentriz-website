@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scentriz Engineers House Pvt. Ltd.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #c0150f;
+    --red-dark: #8b0e09;
+    --red-light: #e8201a;
+    --white: #ffffff;
+    --off-white: #f5f3f0;
+    --dark: #111111;
+    --mid: #1e1e1e;
+    --gray: #888;
+    --border: rgba(192,21,15,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--dark);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 72px;
+    background: rgba(17,17,17,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo .se-badge {
+    width: 42px; height: 42px;
+    background: var(--red);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: white;
+    box-shadow: 0 0 18px rgba(192,21,15,0.5);
+  }
+
+  .nav-logo .brand-text {
+    line-height: 1;
+  }
+
+  .nav-logo .brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--white);
+  }
+
+  .nav-logo .brand-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--red);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .nav-cta:hover { background: var(--red-light); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    padding: 72px 5vw 0;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(192,21,15,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(192,21,15,0.06) 0%, transparent 50%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(192,21,15,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(192,21,15,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 70%);
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 700px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 36px; height: 1px;
+    background: var(--red);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 8vw, 110px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.35s forwards;
+  }
+
+  .hero-title .accent { color: var(--red); }
+
+  .hero-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    max-width: 500px;
+    margin-top: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s forwards;
+  }
+
+  .hero-actions {
+    display: flex; gap: 16px; margin-top: 44px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.65s forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 14px 36px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+
+  .btn-outline:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+
+  .hero-stats {
+    position: absolute;
+    right: 5vw;
+    bottom: 12vh;
+    display: flex; flex-direction: column; gap: 32px;
+    opacity: 0;
+    animation: fadeLeft 0.8s 0.8s forwards;
+  }
+
+  .stat {
+    text-align: right;
+    border-right: 2px solid var(--red);
+    padding-right: 20px;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    opacity: 0;
+    animation: fadeUp 0.7s 1s forwards;
+  }
+
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, transparent, var(--red));
+    animation: scrollPulse 1.5s infinite;
+  }
+
+  /* ── PILLARS STRIP ── */
+  .pillars {
+    background: var(--red);
+    padding: 0 5vw;
+    overflow: hidden;
+  }
+
+  .pillars-inner {
+    display: flex;
+    border-left: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .pillar {
+    flex: 1;
+    padding: 22px 28px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; gap: 14px;
+    transition: background 0.2s;
+  }
+
+  .pillar:hover { background: rgba(0,0,0,0.12); }
+
+  .pillar-icon { font-size: 22px; }
+
+  .pillar-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 100px 5vw;
+  }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block; width: 28px; height: 1px;
+    background: var(--red);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .section-title .accent { color: var(--red); }
+
+  .section-body {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    max-width: 560px;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--mid); }
+
+  .services-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 64px;
+    flex-wrap: wrap; gap: 24px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+  }
+
+  .service-card {
+    background: var(--dark);
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--red);
+    transition: height 0.4s ease;
+  }
+
+  .service-card:hover::before { height: 100%; }
+  .service-card:hover { transform: translateY(-4px); }
+
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    color: rgba(192,21,15,0.12);
+    line-height: 1;
+    margin-bottom: 20px;
+    transition: color 0.3s;
+  }
+
+  .service-card:hover .service-num { color: rgba(192,21,15,0.25); }
+
+  .service-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  .service-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .service-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 24px;
+  }
+
+  .tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid rgba(192,21,15,0.3);
+    padding: 4px 10px;
+  }
+
+  /* ── WHY US ── */
+  #why {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #why::before {
+    content: 'SE';
+    position: absolute;
+    right: -2vw; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30vw;
+    color: rgba(192,21,15,0.03);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .why-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .why-points {
+    display: flex; flex-direction: column; gap: 0;
+    margin-top: 40px;
+  }
+
+  .why-point {
+    display: flex; gap: 24px; align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: padding-left 0.3s;
+  }
+
+  .why-point:hover { padding-left: 12px; }
+
+  .why-point-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 2px;
+    min-width: 28px;
+    padding-top: 3px;
+  }
+
+  .why-point-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .why-point-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .why-visual {
+    position: relative;
+  }
+
+  .why-card-stack {
+    display: flex; flex-direction: column; gap: 16px;
+    position: relative; z-index: 1;
+  }
+
+  .metric-card {
+    background: var(--mid);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 32px;
+    display: flex; align-items: center; gap: 24px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .metric-card:hover { border-color: var(--red); transform: translateX(8px); }
+
+  .metric-bar {
+    width: 4px;
+    background: var(--red);
+    align-self: stretch;
+    border-radius: 2px;
+  }
+
+  .metric-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .metric-num span { color: var(--red); }
+
+  .metric-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ── PROCESS ── */
+  #process { background: var(--mid); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    margin-top: 64px;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--red), var(--red), var(--red), transparent);
+    opacity: 0.3;
+  }
+
+  .step {
+    padding: 0 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .step-dot {
+    width: 56px; height: 56px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    background: var(--dark);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--red);
+    transition: background 0.3s, border-color 0.3s;
+    position: relative; z-index: 1;
+  }
+
+  .step:hover .step-dot { background: var(--red); color: white; border-color: var(--red); }
+
+  .step-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── TECH STACK ── */
+  #stack { background: var(--dark); }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    margin-top: 48px;
+  }
+
+  .stack-item {
+    background: var(--mid);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 12px;
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    cursor: default;
+  }
+
+  .stack-item:hover { border-color: var(--red); color: var(--white); transform: translateY(-3px); }
+
+  .stack-emoji { font-size: 22px; display: block; margin-bottom: 8px; }
+
+  /* ── CTA ── */
+  #contact {
+    background: var(--red);
+    padding: 100px 5vw;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 80% 50%, rgba(0,0,0,0.2) 0%, transparent 60%);
+  }
+
+  #contact::after {
+    content: 'CONTACT';
+    position: absolute;
+    right: -2vw; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20vw;
+    color: rgba(0,0,0,0.1);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    position: relative; z-index: 1;
+    display: flex; justify-content: space-between; align-items: center; gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 0.95;
+    letter-spacing: 2px;
+    color: white;
+  }
+
+  .cta-title .light { opacity: 0.6; }
+
+  .cta-form {
+    display: flex; flex-direction: column; gap: 14px;
+    min-width: 340px;
+  }
+
+  .cta-input {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 14px 20px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+
+  .cta-input::placeholder { color: rgba(255,255,255,0.5); }
+  .cta-input:focus { border-color: white; background: rgba(255,255,255,0.15); }
+
+  .cta-row { display: flex; gap: 14px; }
+  .cta-row .cta-input { flex: 1; }
+
+  .btn-dark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--dark);
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+
+  .btn-dark:hover { background: #222; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0a0a0a;
+    padding: 60px 5vw 32px;
+    border-top: 1px solid rgba(192,21,15,0.2);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand .brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: white;
+  }
+
+  .footer-brand .brand-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .footer-brand p {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.35);
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .footer-col a {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  .footer-copy {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid rgba(192,21,15,0.3);
+    padding: 4px 12px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  /* ── REVEAL ON SCROLL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .why-layout { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .process-steps::before { display: none; }
+    .hero-stats { display: none; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .cta-form { min-width: unset; width: 100%; }
+  }
+
+  @media (max-width: 600px) {
+    .pillars-inner { flex-wrap: wrap; }
+    .pillar { flex: 1 1 50%; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .cta-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="se-badge">SE</div>
+    <div class="brand-text">
+      <div class="brand-name">SCENTRIZ</div>
+      <div class="brand-sub">Engineers House</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#stack">Tech Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get In Touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">End-to-End Engineering Solutions</div>
+    <h1 class="hero-title">
+      BUILD.<br>
+      <span class="accent">SCALE.</span><br>
+      DELIVER.
+    </h1>
+    <p class="hero-subtitle">
+      We design and develop enterprise-grade distributed systems, scalable cloud architectures, and cross-platform mobile applications — built for performance, built to last.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#contact" class="btn-outline">Start a Project</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Projects Delivered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- PILLARS STRIP -->
+<div class="pillars">
+  <div class="pillars-inner">
+    <div class="pillar"><span class="pillar-icon">⚙️</span><span class="pillar-text">Engineering</span></div>
+    <div class="pillar"><span class="pillar-icon">💻</span><span class="pillar-text">Software</span></div>
+    <div class="pillar"><span class="pillar-icon">💡</span><span class="pillar-text">Innovation</span></div>
+    <div class="pillar"><span class="pillar-icon">🛡️</span><span class="pillar-text">Excellence</span></div>
+    <div class="pillar"><span class="pillar-icon">🤝</span><span class="pillar-text">Trust</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Our <span class="accent">Services</span></h2>
+    </div>
+    <p class="section-body">From concept to deployment — we deliver complete engineering solutions across every layer of the technology stack.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">🏗️</div>
+      <div class="service-name">Enterprise Application Development</div>
+      <p class="service-desc">Robust, maintainable enterprise platforms with microservices architecture, domain-driven design, and clean code principles that scale with your business.</p>
+      <div class="service-tags">
+        <span class="tag">Microservices</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Java</span>
+        <span class="tag">.NET</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">02</div>
+      <div class="service-icon">🌐</div>
+      <div class="service-name">Distributed Systems</div>
+      <p class="service-desc">Event-driven, fault-tolerant distributed architectures built for high availability. From Kafka pipelines to multi-region cloud deployments.</p>
+      <div class="service-tags">
+        <span class="tag">Kafka</span>
+        <span class="tag">Redis</span>
+        <span class="tag">Event-Driven</span>
+        <span class="tag">CQRS</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">03</div>
+      <div class="service-icon">☁️</div>
+      <div class="service-name">Scalable Cloud Architecture</div>
+      <p class="service-desc">Cloud-native solutions on AWS, Azure, and GCP — containerized, auto-scaling, and fully observable with CI/CD pipelines and infrastructure as code.</p>
+      <div class="service-tags">
+        <span class="tag">AWS</span>
+        <span class="tag">ECS Fargate</span>
+        <span class="tag">Terraform</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">04</div>
+      <div class="service-icon">📱</div>
+      <div class="service-name">Mobile Application Development</div>
+      <p class="service-desc">Cross-platform mobile apps with native-quality performance. Beautiful UI, real-time features, offline support, and seamless backend integration.</p>
+      <div class="service-tags">
+        <span class="tag">Flutter</span>
+        <span class="tag">React Native</span>
+        <span class="tag">iOS</span>
+        <span class="tag">Android</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">05</div>
+      <div class="service-icon">🔌</div>
+      <div class="service-name">API Design & Integration</div>
+      <p class="service-desc">RESTful and GraphQL APIs designed for clarity, security, and performance. Third-party integrations, payment gateways, and webhook architectures.</p>
+      <div class="service-tags">
+        <span class="tag">REST</span>
+        <span class="tag">GraphQL</span>
+        <span class="tag">OAuth2</span>
+        <span class="tag">WebSocket</span>
+      </div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-num">06</div>
+      <div class="service-icon">🔍</div>
+      <div class="service-name">DevOps & Observability</div>
+      <p class="service-desc">End-to-end DevOps pipelines with full observability stacks — Prometheus, Grafana, ELK — ensuring you always know how your systems perform.</p>
+      <div class="service-tags">
+        <span class="tag">Prometheus</span>
+        <span class="tag">Grafana</span>
+        <span class="tag">ELK Stack</span>
+        <span class="tag">CI/CD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-layout">
+    <div>
+      <div class="section-eyebrow">Why Choose Us</div>
+      <h2 class="section-title">Engineering <span class="accent">Excellence</span><br>At Every Layer</h2>
+      <div class="why-points">
+        <div class="why-point reveal">
+          <div class="why-point-num">01</div>
+          <div>
+            <div class="why-point-title">End-to-End Ownership</div>
+            <p class="why-point-text">From architecture design to production deployment — we own every layer so you don't have to manage fragmented vendors.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-num">02</div>
+          <div>
+            <div class="why-point-title">Production-Grade Quality</div>
+            <p class="why-point-text">Every system is built with observability, resilience, and scalability baked in from day one — not bolted on later.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-num">03</div>
+          <div>
+            <div class="why-point-title">Domain-Driven Engineering</div>
+            <p class="why-point-text">Deep expertise across fintech, logistics, hyperlocal commerce, and HR tech — we bring context to every codebase.</p>
+          </div>
+        </div>
+        <div class="why-point reveal">
+          <div class="why-point-num">04</div>
+          <div>
+            <div class="why-point-title">Agile & Transparent</div>
+            <p class="why-point-text">Two-week sprints, continuous delivery, and direct communication. You always know exactly where your project stands.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual reveal">
+      <div class="why-card-stack">
+        <div class="metric-card">
+          <div class="metric-bar"></div>
+          <div>
+            <div class="metric-num">50<span>+</span></div>
+            <div class="metric-label">Enterprise Projects Delivered</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-bar"></div>
+          <div>
+            <div class="metric-num">99<span>%</span></div>
+            <div class="metric-label">System Uptime SLA</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-bar"></div>
+          <div>
+            <div class="metric-num">10<span>+</span></div>
+            <div class="metric-label">Years of Expertise</div>
+          </div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-bar"></div>
+          <div>
+            <div class="metric-num">30<span>+</span></div>
+            <div class="metric-label">Technologies Mastered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-eyebrow">How We Work</div>
+  <h2 class="section-title">Our <span class="accent">Process</span></h2>
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-dot">01</div>
+      <div class="step-label">Discovery</div>
+      <p class="step-desc">Deep-dive into your requirements, tech landscape, and business goals to shape the right architecture.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-dot">02</div>
+      <div class="step-label">Design</div>
+      <p class="step-desc">System architecture, database schemas, API contracts, and UI/UX wireframes — fully documented before we write a line of code.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-dot">03</div>
+      <div class="step-label">Develop</div>
+      <p class="step-desc">Agile sprints with CI/CD pipelines from day one. Code reviews, automated testing, and continuous integration.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-dot">04</div>
+      <div class="step-label">Deploy</div>
+      <p class="step-desc">Zero-downtime production deployments on your preferred cloud with full observability and rollback capabilities.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-dot">05</div>
+      <div class="step-label">Support</div>
+      <p class="step-desc">Post-launch monitoring, performance tuning, and ongoing engineering support to keep your systems running at peak.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="stack">
+  <div class="section-eyebrow">Technologies</div>
+  <h2 class="section-title">Our <span class="accent">Tech Stack</span></h2>
+  <p class="section-body" style="margin-bottom: 0;">We work with the modern, battle-tested technologies your enterprise demands.</p>
+  <div class="stack-grid">
+    <div class="stack-item reveal"><span class="stack-emoji">☕</span>Java 21</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🍃</span>Spring Boot</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🐍</span>Python</div>
+    <div class="stack-item reveal"><span class="stack-emoji">⚛️</span>React</div>
+    <div class="stack-item reveal"><span class="stack-emoji">📱</span>Flutter</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🟦</span>TypeScript</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🍃</span>MongoDB</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🐘</span>PostgreSQL</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🔴</span>Redis</div>
+    <div class="stack-item reveal"><span class="stack-emoji">📨</span>Kafka</div>
+    <div class="stack-item reveal"><span class="stack-emoji">☁️</span>AWS</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🐳</span>Docker</div>
+    <div class="stack-item reveal"><span class="stack-emoji">☸️</span>Kubernetes</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🔁</span>Terraform</div>
+    <div class="stack-item reveal"><span class="stack-emoji">📊</span>Grafana</div>
+    <div class="stack-item reveal"><span class="stack-emoji">🔍</span>Elasticsearch</div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section id="contact">
+  <div class="cta-inner">
+    <div>
+      <div class="cta-title">
+        <div class="light">LET'S BUILD</div>
+        <div>SOMETHING</div>
+        <div class="light">GREAT.</div>
+      </div>
+    </div>
+    <div class="cta-form">
+      <div class="cta-row">
+        <input class="cta-input" type="text" placeholder="Your Name">
+        <input class="cta-input" type="email" placeholder="Email Address">
+      </div>
+      <input class="cta-input" type="text" placeholder="Company Name">
+      <select class="cta-input" style="cursor:pointer; appearance:none;">
+        <option value="" disabled selected>Type of Project</option>
+        <option>Enterprise Application</option>
+        <option>Distributed System</option>
+        <option>Mobile Application</option>
+        <option>Cloud Architecture</option>
+        <option>API Development</option>
+        <option>Other</option>
+      </select>
+      <textarea class="cta-input" rows="3" placeholder="Brief description of your project..."></textarea>
+      <button class="btn-dark">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="brand-name">SCENTRIZ</div>
+      <div class="brand-sub">Engineers House Private Limited</div>
+      <p>End-to-end engineering solutions. We design and build the systems that power modern businesses.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Enterprise Apps</a></li>
+        <li><a href="#">Distributed Systems</a></li>
+        <li><a href="#">Cloud Architecture</a></li>
+        <li><a href="#">Mobile Apps</a></li>
+        <li><a href="#">API Development</a></li>
+        <li><a href="#">DevOps</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Case Studies</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@scentriz.com">info@scentriz.com</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="#">Twitter / X</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Scentriz Engineers House Private Limited. All Rights Reserved.</div>
+    <div class="footer-badge">Made in India 🇮🇳</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, (entry.target.dataset.delay || 0) * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach((el, i) => {
+    el.dataset.delay = i % 6;
+    observer.observe(el);
+  });
+
+  // Smooth nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'white' : '';
+    });
+  });
+
+  // Contact form feedback
+  document.querySelector('.btn-dark').addEventListener('click', () => {
+    const btn = document.querySelector('.btn-dark');
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#1a1a1a';
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
